@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+</head>
+<body>
+    <div class="cadre">
+        <video id="lecteur-video" controls>
+            <source src="Togo vs Cape Verde 3-2 All Goals Highlights - Afcon Qualifiers 2023.mp4" type="video/mp4">
+        </video>
+        <div class="Attente">
+            <h2>File d'Attente</h2>
+            <ul id="playlists">
+                <li data-video="Togo vs Cape Verde 3-2 All Goals Highlights - Afcon Qualifiers 2023.mp4" ><img src="video1-thumbnail.jpg" alt="Miniature de Vidéo 1"> Video1</li>
+                <li data-video="Togo vs Cape Verde 3-2 All Goals Highlights - Afcon Qualifiers 2023.mp4"><img src="video1-thumbnail.jpg" alt="Miniature de Vidéo 1"> video2</li>
+                <li data-video="Togo vs Cape Verde 3-2 All Goals Highlights - Afcon Qualifiers 2023.mp4"><img src="video1-thumbnail.jpg" alt="Miniature de Vidéo 1">Video3</li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    .cadre {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        max-width: 10000px;
+        margin-left: 25px;
+        margin-right: 25px;
+        padding: 20px;
+        background-color: #82cbdd;
+        box-shadow: 0px 0px 10px rgba(19, 18, 18, 0.664);
+        margin-top: 15%;
+    }
+
+    #lecteur-video {
+        max-width: 900px;
+        width: 100%;
+        background-color: #333;
+        border-radius: 5px;
+    }
+
+    .Attente {
+        flex: 1;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        cursor: pointer;
+        background-color: #f2f2f2;
+        color: #130101;
+        padding: 10px;
+        width: 150px;
+        height: 100px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease-in-out;
+        display: flex;
+        align-items: center; 
+    }
+
+    li img {
+        width: 170px; 
+        margin-right: 10px;
+        height: 110px;
+    }
+    
+    li:hover {
+        background-color: #005fa6;
+    }
+</style>
+
+<script>
+    
+    const videoPlayer = document.getElementById('lecteur-video');
+    const playlist = document.getElementById('playlists');
+
+    
+    playlist.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+            const videoSource = e.target.getAttribute('data-video');
+            videoPlayer.src = videoSource;
+            videoPlayer.load();
+            videoPlayer.play();
+        }
+    });
+</script>
