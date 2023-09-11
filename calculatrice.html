@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    
+</head>
+<body>
+    <div class="env-cal">
+        <input type="text" id="affichage" readonly>
+        <button class="supprimer" onclick="effacer()">C</button>
+        <div class="bout-calc">
+            <button onclick="Afficher(event)">9</button>
+            <button onclick="Afficher(event)">8</button>
+            <button onclick="Afficher(event)">7</button>
+            <button onclick="Afficher(event)">+</button>
+            <button onclick="Afficher(event)">6</button>
+            <button onclick="Afficher(event)">5</button>
+            <button onclick="Afficher(event)">4</button>
+            <button onclick="Afficher(event)">-</button>
+            <button onclick="Afficher(event)">3</button>
+            <button onclick="Afficher(event)">2</button>
+            <button onclick="Afficher(event)">1</button>
+            <button onclick="Afficher(event)">*</button>
+            <button onclick="Afficher(event)">0</button>
+            <button onclick="Afficher(event)">.</button>
+            <button onclick="Resultat()">=</button>
+            <button onclick="Afficher(event)">/</button>
+            
+        </div>
+    </div>
+   
+</body>
+</html>
+
+<style>
+    .env-cal {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #333;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background-color: #f0f0f0;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+    .bout-calc {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .bout-calc button {
+        width: calc(25% - 10px);
+        height: 45px;
+        font-size: 20px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+    }
+    .boutonscal button:hover {
+        background-color: #555;
+    }
+    button.supprimer {
+        background-color: #ff3333;
+        
+    }
+    button.supprimer:hover {
+        background-color: #ff5555;
+    }
+</style>
+<script>
+    function Afficher(event) {
+        document.getElementById('affichage').value += event.target.textContent;
+    }
+
+    function effacer() {
+        document.getElementById('affichage').value = '';
+    }
+
+
+    function Addition(expression) {
+        const operateurs = expression.split('+');
+        if (operateurs.length === 2) {
+            const num1 = parseFloat(operateurs[0]);
+            const num2 = parseFloat(operateurs[1]);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('affichage').value = num1 + num2;
+            } else {
+                document.getElementById('affichage').value = 'Erreur';
+            }
+        } else {
+            document.getElementById('affichage').value = 'Erreur';
+        }
+    }
+
+    function Soustraction(expression) {
+        const operateurs = expression.split('-');
+        if (operateurs.length === 2) {
+            const num1 = parseFloat(operateurs[0]);
+            const num2 = parseFloat(operateurs[1]);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('affichage').value = num1 - num2;
+            } else {
+                document.getElementById('affichage').value = 'Erreur';
+            }
+        } else {
+            document.getElementById('affichage').value = 'Erreur';
+        }
+    }
+
+    function Multiplication(expression) {
+        const operateurs = expression.split('*');
+        if (operateurs.length === 2) {
+            const num1 = parseFloat(operateurs[0]);
+            const num2 = parseFloat(operateurs[1]);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('affichage').value = num1 * num2;
+            } else {
+                document.getElementById('affichage').value = 'Erreur';
+            }
+        } else {
+            document.getElementById('affichage').value = 'Erreur';
+        }
+    }
+
+    function Division(expression) {
+        const operateurs = expression.split('/');
+        if (operateurs.length === 2) {
+            const num1 = parseFloat(operateurs[0]);
+            const num2 = parseFloat(operateurs[1]);
+            if (!isNaN(num1) && !isNaN(num2) && num2 !== 0) {
+                document.getElementById('affichage').value = num1 / num2;
+            } else {
+                document.getElementById('affichage').value = 'Erreur';
+            }
+        } else {
+            document.getElementById('affichage').value = 'Erreur';
+        }
+    }
+
+    
+    function Resultat() {
+        const affichage = document.getElementById('affichage');
+        const expression = affichage.value;
+
+        if (expression.includes('+')) {
+            Addition(expression);
+        } else if (expression.includes('-')) {
+            Soustraction(expression);
+        } else if (expression.includes('*')) {
+            Multiplication(expression);
+        } else if (expression.includes('/')) {
+           Division(expression);
+        } else {
+            affichage.value = 'Erreur';
+        }
+    }
+</script>
